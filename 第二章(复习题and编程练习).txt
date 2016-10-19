@@ -1,0 +1,122 @@
+复习题:
+1.c++程序的模块叫什么?
+	答:函数
+2.下面的预处理编译指令是做什么用的?
+	#include<iostream>
+	答:这将导致在最终的编译之前,使用iostream文件中的内容替换该编译指令
+3.下面的语句是做什么用的?
+	uisng namespace std;
+	答:它使得程序可以使用std名称空间的定义.
+4.什么语句可以用来打印短语"Hello,world",然后开始新的一行?
+	答:cout<<"Hello,world\n";或者cout<<"Hello,world"<<endl;
+5.什么语句可以创建名为cheeses的整数变量?
+	答:int cheeses;
+6.什么语句可以用来将值32赋给变量cheeses?
+	答:cheeses=32;
+7.什么语句可以用来将从键盘输入的值读入变量cheeses?
+	答:cin>>cheeses;
+8.什么语句可以用来打印"We have X varieties of cheese",用cheeses变量的当前值代替X?
+	答:cout<<"We have"<<cheeses<<"varieties of cheese";
+9.下面的函数原型指出了关于函数的那些信息?
+	int froop(double t);
+	void rattle(int n);
+	int prune(void);
+	答:int froop(double t);需要传入一个double类型的参数,返回值是int
+	   void rattle(int n);需要传入一个int类型的参数,无返回值.
+	   int prune(void);不需要传入参数,返回值为int.
+10.定义函数时,在什么情况下不必使用关键字return?
+	答:函数的返回值为void时候,或者直接return;
+
+
+编程练习:
+
+1.编写一个c++程序,它显示您的姓名和地址.
+	void show()
+	{
+	  cout<<"I am MrXu,I live in ShanXi"<<endl;
+	}
+2.编写一个c++程序,他要求用户输入一个以浪为单位的距离,然后将它转换为码(1浪=220码)
+	int main()
+	{
+	   cout<<"Please input lang;
+	   double lang;
+	   cin>>lang;
+	   cout<<lang<<"="<<LangToMa(lang)<<"ma"<<endl;
+	   return 0;
+	}
+	double LangToMa(double lang)
+	{
+	  return 220*lang;
+	}
+3.编写一个c++程序,它使用3个用户定义的函数(包括main()),生成下面的输出:
+	Three blind mice
+	Three blind mice
+	See how they run
+	See how they run
+  其中一个函数要调用两次,该函数生成前两行;另一个函数也被调用两次,并生成其余的输出.
+	int main()
+	{
+	 mice();
+	 mice();
+	 run();
+	 run();
+	 return 0;
+	}
+	void mice()
+	{
+	 cout<<"Three blind mice"<<endl;
+	}
+	void run()
+	{
+	 cout<<"See how they run"<<endl;
+	}
+4.编写一个程序,其中的main()调用一个用户定义的函数(以摄氏温度值为参数,并返回相应的华氏温度值).该程序要求用户输入
+  摄氏度,并显示结果:
+  Please enter a Celsius value:20
+  20 degrees Celisius is 68 degrees Fahrenheit.
+	int main()
+	{
+	 cout<<"Please enter a Celsius value:"
+	 double degrees;
+	 cin>>degrees;	
+	 cout<<degrees<<"degrees Celisius is"<<Fahrenheit(degrees)<<"degrees Fahrenheit"<<endl;
+	 return 0;                                                                                
+	}
+	double Fahrenheit(int degrees)
+	{
+	  double 1.8*degrees+32.0;
+	}
+5.编写一个程序,其中main()调用一个用户定义的函数(以光年值为参数,返回对应的天文单位的值,1光年=63240天文单位).要求如下:
+	Enter the number of light years:4.2
+	4.2 light years=265608 astronomical units.
+
+	int main()
+	{
+	    cout<<"Enter the number of light years:";
+	    double light_years;
+	    cin>>light_years;
+	    cout<<light_years<<"light years="<<unit(light_years)<<"astronomical units"<<endl;
+	}
+	double unit(double light)
+	{
+	   return 63240*light;
+	}
+6.编写一个程序,要求用户输入小时数和分钟数,在main()函数中,将这两个值传递给一个void函数,后者以下面格式显示
+ 这两个值:
+	Enter the number of hours:9
+	Enter the number of minutes:28
+	Time:9:28.
+	int main()
+	{
+	    cout<<"Enter the number of hours:";
+	    int hours;
+	    cin>>hours;
+	    cout<<"Enter the number of minutes:";
+	    int minutes;
+	    cin>>minutes;
+	    return 0;
+	}
+	double show_time(int hours,int minutes)
+	{
+	   cout<<hours<<":"<<minutes<<endl;
+	}
