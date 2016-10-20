@@ -1,0 +1,148 @@
+复习题
+1.为什么c++有多种整型?
+	答:有多种整型,可以根据特定需求选择最合适的类型.例如可以使用short来存储空格,使用long来确保存储容量
+	也可以寻找可提高特定计算的速度的类型
+2.声明与下述描述相符的变量:
+	a:short整数,值为80;
+	b:unsigned int整数 值为42110;
+	c:值为300000000000的整数.
+	答:short a=80;   unsigned int=42110;  unsigned long c=3000000000; //long long c=3000000000;
+3.c++提供了什么措施来防止超出整型的范围?
+	答:c++没有提供措施来防止超出整型范围,可以使用头文件climits来确定限制情况.
+4.33L与33之间有什么区别?
+	答:33L的类型为long  33的类型为int
+5.下面两条语句是否等价?
+	char grade=65;
+	char grade='A';
+	答:只有在使用ASCII码的系统上,第一条语句才会被设置为A,另65是整型,A是字符型 所以两条语句并不真正等价
+6.如何使用c++来找出编码88表示的字符?指出至少两种方法
+	答:char c=88;   
+	   cout<<c<<endl;
+	   cout<<put.(char(88))<<endl;
+	   cout<<char(88)<<endl;
+7.将long值赋给float会导致舍入误差,将long赋值给double呢?
+	答:这个问题取决于long的长度,如果long为4个字节,则没用损失,因为最大的long值将是20亿,既有10位数,double至少
+	13位.而long long 可提供19位,超过了double的13位
+8.下列c++表达式的结果分别是多少?
+	a:8*9+2		b:6*3/4		c:3/4*6		d:6.0*3/4	e:15%4
+	答:74		  4		0		4.5		3
+9.假设x1和x2是两个类型为double的变量,而要将他们作为整数,并相加,然后将结果赋给一个整形变量,请编写一个c++语句完成.
+	答:int pos=(int)x1+(int)x2;
+
+编程练习:
+
+1.编写一个程序,要求用户使用一个整数指出自己的身高,(单位为英寸),然后将身高转换为英尺呵英寸,该程序使用下划线字符
+来指示输入位置,另外,使用一个const符号常量来表示转换因子.
+
+	int main()
+	{
+	    const int inch_per_feet=12;
+	    cout<<"Please enter your height in inches:___\b\b\b";
+	    int  ht_inch;;
+	    cin>> ht_inch;
+	    int ht_feet=ht_inch/inch_per_feet;//取商
+	    int rm_inch=ht_inch%inch_per_feet;//取余
+	    cout<<"your height is "<<ht_feet<<" feet,and "    <<rm_inch<<" inches\n";
+	    return 0;
+	}
+2.编写一个小程序,要求以几英尺几英寸的方式输入身高,并且以磅为单位输入其体重(使用三个变量来存储这些信息).
+  然后报告其BMI(体重指数) 1英尺=12英寸 1英寸=0.0254米,1千克=2.2磅,BMI=体重(千克)/身高的平方(米).
+	  int main()
+	  {
+	    // 1英尺=12英寸 1英寸=0.0254米,1千克=2.2磅,BMI=体重(千克)/身高的平方(米).
+	    cout<<"Please enter your height"<<endl;
+	    cout<<"First,enter your height of feet part(输入你身高的英尺部分):"<<endl;
+	    int yingchi;
+	    cin>>yingchi;
+	    cout<<"Second,enter your height of inches part(输入你身高的英寸部分):"<<endl;
+	    int yingcun;
+	    cin>>yingcun;
+	    cout<<"Please,enter your weight in pound:___\b\b";
+	    int weight;
+	    cin>>weight;
+	    double mi=yingchi*12*0.0254;
+	    double kg=weight*2.2;
+	    double BMI=kg/(mi*mi);
+	    cout<<"Your BMI is"<<BMI<<endl;
+	    return 0;
+
+	   }
+3.编写一个程序,要求用户以度,分,秒的方式输入一个纬度,然后以度为单位显示该纬度,1度60分,1分60秒,请以符号常量
+  的方式表示这些值,对于每个输入值,应使用一个独立的变量存储它,下面是该程序运行时的情况:
+   Enter a latitude ub degrees,minutes,and seconds:
+   First ,enter the degrees:37
+   Next,enter the minutes of arc:51
+   Finally,enter the seconds of arc:19
+   37degrees,51 minutes,19 seconds=37.8553 degrees.
+
+   int main()
+   {
+    const int minutes_per_degree=60;
+    const int seconds_per_minute=60;
+    cout<<" Enter a latitude ub degrees,minutes,and seconds:"<<endl;
+    int degrees,minutes,seconds;
+    cout<<"First ,enter the degrees:";
+    cin>>degrees;
+    cout<<"Next,enter the minutes of arc:";
+    cin>>minutes;
+    cout<<"Finally,enter the seconds of arc:";
+    cin>>seconds;
+    double res=(double)degrees+(double)minutes/minutes_per_degree+(double)seconds/seconds_per_minute/minutes_per_degree;
+    cout<<degrees<<" degrees "<<minutes<<" minutes "<<seconds<<" seconds ="<<res<<" degrees";
+    return 0;
+
+   }
+4. 编写一个程序,要求用户以整数方式输入秒(使用long变量存储),然后以天,小时,分钟和秒的方式显示这段时间,使用符号常量
+   来表示每天有多少小时,每小时有多少分钟以及每分钟有多少秒,改程序的输出应该和下面的类似:
+	Enter the number of seconds:31600000
+	31600000 seconds=365 days,46 minutes,40 seconds.
+	int main()
+	{
+	    const int hours_per_day=24;
+	    const int minutes_per_hour=60;
+	    const int seconds_per_minute=60;
+	    long seconds;
+	    cout<<"Enter the number of seconds:";
+	    cin>>seconds;
+	    int day,hour,second,minutes;
+	    day=seconds/seconds_per_minute/minutes_per_hour/hours_per_day;
+	    hour=seconds/seconds_per_minute/minutes_per_hour%hours_per_day;
+	    minutes=seconds/seconds_per_minute%minutes_per_hour;
+	    second=seconds%seconds_per_minute;
+	    cout<<seconds<<" seconds= "<<day<<" day "<<hour<<
+	    " hour "<<minutes<<" minutes "<<second<<" seconds"<<endl;
+	    return 0;
+
+	}
+5.编写一个程序,要求用户输入驱车里程(英里)和使用汽油量(加仑),然后指出汽车耗油量为一加仑的里程,
+  如果愿意,也可以让程序要求用户以公里为单位输入距离,并以升为单位输入汽油量,然后指出每100公里的耗油量(升).
+  
+	int main()
+	{
+	    int km;
+	    int L;
+	    cout<<"请输入里程:";
+	    cin>>km;
+	    cout<<"请输入汽油量:";
+	    cin>>L;
+	    cout<<"每100Km的耗油量是:"<<(double)(km/100)/L<<"一百千米每升";
+	    return 0;
+
+	}
+6.编写一个程序,将每100公里消耗的汽油量(升)转换为每加仑多少英里,100km=62.14英里,1加仑=3.875升.
+	int main()
+	{
+	    double km;
+	    double L;
+	    double jialun;
+	    double yingli;
+	    cout<<"请输入里程:";
+	    cin>>km;
+	    cout<<"请输入汽油量:";
+	    cin>>L;
+	    cout<<"每100Km的耗油量是:"<<(double)(km/100)/L<<endl;
+	    yingli=(double)km*0.6214;
+	    jialun=(double)L/3.875;
+	    cout<<yingli/jialun<<"英里/加仑"<<endl;
+	    return 0;
+	}
