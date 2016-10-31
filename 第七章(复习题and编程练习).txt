@@ -1,0 +1,367 @@
+复习题:
+1.使用函数的三个步骤是什么?
+	答:这3个步骤是定义函数,提供原型,调用函数
+2.请创建与下面的描述匹配的函数原型:
+	a.igor()没有参数,且没有返回值.	b.tofu()接受一个int参数,并返回一个float
+	void igor();				float toufu(int n);
+	c.mpg()接受两个double参数,并返回一个double  d.summation()将long数组和数组长度作为参数,并返回一个long值
+	double mpg(double a,double b);			long summation(long a[],int n);	
+	e.doctor()接受一个字符串参数(不能修改字符串),并返回一个double值
+		double doctor(const string str);
+	f.ofcourse(),将boss结构作为参数,不返回值.
+		void ofcourse(boss b);
+	g.plot()将map结构的指针作为参数,并返回一个字符串
+		string plot(map *pmap);
+3.编写一个接受3个参数的函数:int数组名,数组长度和一个int值,并将数组的所有元素都设置为该int值
+	void set_array(int arr[],int n,int num)
+	{
+		for(int i=0;i<n;i++)
+		{
+			arr[i]=num;
+		}
+	}
+
+4.编写一个接受3个参数的函数:指向数组区间中第一个元素的指针,指向数组区间最后一个元素后面的指针以及一个int值,
+并将数组中的每个元素都设置为该int值.
+	void init(int *begin,int *end,int num)
+	{
+	    for(int *p=begin,p!=end;p++)
+	    {
+		*p=num;
+	    }
+	}
+
+5.编写将double数组名和数组长度作为参数,并返回该数组中最大值的函数,该函数不应修改数组的内容
+	double max(const double a[],int n)
+	{
+		double m=0;
+		for(int i=0;i<n;i++)
+		{
+			if(a[i]>m)
+			{	
+		           m=a[i];
+			}
+		}
+		return m;
+	}
+6.为什么不对类型为基本类型的函数参数使用const限定符?
+	将const限定符用于指针,以防止指向的原始数据被修改,程序传递基本类型(如int或double)时,它将按值传递,
+以便使用副本,这样原始数据将得到保护.
+7.c++程序可使用哪3种c-风格字符串格式?
+	1.char *  2."abcdef"  3.char [];
+8.编写一个函数,其原型如下:
+	int replace(char *str,char c1,char c2);
+  该函数将字符串中所有的cl都替换为c2,并返回替换次数.
+	int replace(char *str,char c1,char c2)
+	{
+		int count=0;
+		while(*str)
+		{
+			if(*str==c1)
+			{
+				*str=c2;
+				count++;
+			}
+			*str++;
+		}
+		return count;
+	}
+9.表达式*"pizza"的含义是什么?"taco"[2]呢?
+	*"pizza"的含义是首字符p
+	"taco"[2]的含义是下标为2第三个字符c
+10.c++允许按值传递结构,也允许传递结构的地址,如果glitz是一个结构变量,如何按值传递它?如何传递他的地址?这两种
+方法有什么弊端?
+	按值传递:传递结构名 glitz
+	传递地址:&glitz
+	按值传递将保护原始数据,按地址传递将直接在原始数据上进行修改.
+11.函数judge()的返回类型为int,它将这样一个函数的地址作为参数:将const char指针作为参数,并返回一个int值,请编写
+judge()函数的原型.
+
+	int judge(int (*pf)(const char *));
+
+
+编程练习:
+1.编写一个程序,不断要求用户输入两个数,直到其中的一个为0,对于每两个数,程序将使用一个函数来计算他们的调和平均数,
+并将结果返回给main(),而后者将报告结果,调和平均数=2.0*x*y/(x+y)
+	double aver(double a,double b)
+	{
+	    return 2.0*a*b/(a+b);
+	}
+	int main()
+	{
+	    double a,b;
+	    cin>>a;
+	    cin>>b;
+	    while(a!=0&&b!=0&&cin.good())
+	    {
+		cout<<"调和平均数:"<<aver(a,b)<<endl;
+		cin>>a>>b;
+	    }
+	    return 0;
+	}
+2.编写一个程序,要求用户输入最多10个高尔夫成绩,并将其存储在一个数组中.程序允许用户提前结束输入,并在一行上显示
+所有成绩,然后报告平均成绩,请使用3个数组处理函数来分别输入,显示和计算平均成绩
+		int main()
+		{
+		    double socer[10]={0};
+		    int i=0;
+		    double sum=0.0;
+		    double ave;
+		    while(i<10&&cin.good())
+		    {
+			cin>>socer[i];
+			sum+=socer[i];
+			i++;
+		    }
+		    if(i<10)
+		    {
+			ave=sum/(i-1);
+		    }
+		    else if(i=10)
+		    {
+			ave=sum/i;
+		    }
+		    cout<<"平均数:"<<ave<<endl;
+		    return 0;
+		}
+3.下面是一个结构声明:
+	struct box
+	{
+	 char maker[40];
+	 float height;
+	 float width;
+	 float length;
+	 float volume;
+	};
+   a.编写一个函数,按值传递box结构,并显示每个成员的值.
+	   void display(box b)
+	{
+	    cout<<"maker:"<<b.maker<<endl;
+	    cout<<"height:"<<b.height<<endl;
+	    cout<<"width:"<<b.width<<endl;
+	    cout<<"lenght:"<<b.length<<endl;
+	    cout<<"volume:"<<b.volume<<endl;
+	}
+   b.编写一个函数,传递box结构的地址,并将volume成员设置为其他三维长度的乘积,
+	void  SetVolume(box *b)
+	{
+	    b->volume=b->height*b->length*b->width;
+	}
+   c.编写一个使用这两个函数的简单程序.                                                                                                                               
+5.定义一个递归函数,接受一个整数参数,并返回该参数的阶乘.程序使用循环让用户输入不同的值,程序将报告这些值的阶乘.
+	int jieche(int n)
+	{
+	    if(n<2)
+	    {
+		return 1;
+	    }
+	    else
+	    {
+		return n*jieche(n-1);
+	    }
+	}
+6.编写一个程序,它使用下列函数:Fill_array()将一个double数组的名称和长度作为参数,它提示用户输入double值,并将这些值
+存储到数组中.当数组被填满或用户输入了非数字时,输入将停止,并返回实际输入了多少个数字
+	Show_array(),double数组的长度和名称作为参数,现实数组的内容.
+	Reverse_array(),double数组的长度和名称作为参数,并将存储在数组中的值的顺序反转
+	程序将使用这些函数来填充数组,然后现实数组:反转数组,然后显示数组,反转数组中除第一个和最后一个元素之外的
+	所有元素,然后现实数组.
+	#define s 10
+	void main()
+	{
+	    using namespace std;
+	    int  fill_array(double *p);
+	    void dis_arr(double *p, int n);
+	    int reverse(double *p, double *q);
+	    double ar[s];
+	    int count;
+	    if (!(count = fill_array(ar)))
+	    {
+		cout << "empty!";
+		exit(0);
+	    }
+	    cout << "原来的数组：\n";
+	    dis_arr(ar, count);
+	    reverse(ar, ar + count);
+	    cout << "\n翻转后的数组：\n";
+	    dis_arr(ar, count);
+	    reverse(ar, ar + count);
+	    cout << "\n只反转中间的元素后的数组:\n";
+	    reverse(ar + 1, ar + count - 1);
+	    dis_arr(ar, count);
+	}
+
+
+	int  fill_array(double *p)
+	{
+	    using namespace std;
+	    int  i = 0 ;
+	    while (i < s)
+	    {
+	    cout << "为数组输入一个数：";
+	    if (!(cin >> *(p + i)))
+	    {
+		cin.clear();
+		while (cin.get() != '\n')
+		continue;
+		break;
+	    }
+		i++;
+	    }
+	    return i;
+	}
+
+
+	void dis_arr(double *p, int n)
+	{
+	    using namespace std;
+	    int i;
+	    cout << "数组成员：\n";
+	    for (i = 0; i < n; i++)
+	    {
+		cout << *(p + i) << " ";
+	    }
+	}
+
+
+7.修改程序清单7.7中的3个数组处理函数,使之使用两个指针参数来表示区间.fill_array()函数不返回实际读取了多个个数字
+,而是返回一个指针,该指针指向最后别填充的位置;其他的函数可以将该指针作为第二个参数,以表示数据结尾.
+
+8.这个联系让您编写处理数组和结构的函数,下面是程序的矿建,请提供其中描述的函数,以完成该程序.
+	 #include<iostream>
+	using namespace std;
+	const int SLEN=30;
+	struct student
+	{
+	    char fullname[SLEN];
+	    char hobby[SLEN];
+	    int ooplevel;
+	};
+	int getinfo(student pa[],int n);
+	void display1(student st);
+	void display2(const student *ps);
+	void display3(const student pa[],int n);
+	int main()
+	{
+	    cout<<"Enter class size: ";
+	    int class_size;
+	    cin>>class_size;
+	    while(cin.get()!='\n')
+		continue;
+	    student *ptr_stu=new student(class_size);
+	    int entered=getinfo(ptr_stu,class_size);
+	    for(int i=0;i<entered;i++)
+	    {
+		display1(ptr_stu[i]);
+		display2(&ptr_stu[i]);
+	    }
+	    display3(ptr_str,entered);
+	    delete [] ptr_stu;
+	    cout<<"Done\n";
+	    return 0;
+	}
+9.设计一个名为calculate()的函数,它接受两个double的值和一个指向函数的指针,而被指向的函数接受两个double参数,并返回一个
+double值,calculate()函数的类型也是double,并返回被指向的函数使用calculate()的两个double参数计算得到的值,例如,假设
+ads()函数的定义如下:
+double add(double x,double y)
+{
+	return x+y;
+}
+则下述代码中的函数调用:double q=calculate(2.5,10.4,add);将导致calculate()把2.5和10.4传递给add函数,并返回add()的
+返回值(12.9).
+	请编写一个程序,他将调用上述两个函数和至少另一个与add()类似的函数,该程序使用循环来让用户成对的输入数字,对
+与每队数字,程序都使用calcaulate()来调用add()和至少一个其他的函数,如果读者爱冒险,可以尝试创建一个指针数组,其中的指针
+指向add()样式的函数,并编写一个循环,使用这些指针连续让calculate()调用这些函数.提示:下面是声明这种指针数组的方式,
+其中包含3个指针:
+	double(*pf[3])(double,double);
+	可以采用数组初始化句法,并将函数名作为地址来初始化这样的数组.
+	const int slen = 30;
+	struct student
+	{
+	    char fullname[slen];
+	    char hobby[slen];
+	    int opplevel;
+	};
+	void main()
+	{
+	    int getinfo(student p[], int n);
+	    void display1(student st);
+	    void display2(student *st);
+	    void display3(student p[], int n);
+	    cout << "输入班级人数:";
+	    int class_size;
+	    cin >> class_size;
+	    while (cin.get() != '\n')
+	    continue;
+	    student * p_s = new student[class_size];
+	    int entered = getinfo(p_s, class_size);
+	    for (int i = 0; i < entered; i++)
+	    {
+		display1(p_s[i]);
+		display2(&p_s[i]);
+	    }
+	    display3(p_s, entered);
+	    delete[] p_s;
+	    cout << "done!\n";
+	}
+
+
+	int getinfo(student p[], int n)
+	{
+	    int i;
+	    for (i = 0; i < n; i++)
+	    {
+		cout << "\n输入第" << i + 1 << "个学生的信息:\n";
+		cout << "全名：";
+		if(!(cin >> (p + i)->fullname))
+		    break;
+		cout << "\n爱好:";
+		cin >> (p + i)->hobby;
+		cout << "\nopp level:";
+		cin >> (p + i)->opplevel;
+	    }
+	    return i;
+	}
+
+
+	void display1(student st)
+	{
+	    cout << st.fullname << "   " << st.hobby << "   " << st.opplevel << endl;
+	}
+
+
+	void display2(student *st)
+	{
+	    cout << st->fullname << "   " << st->hobby << "   " << st->opplevel << endl;
+	}
+
+
+	void display3(student p[], int n)
+	{
+	    int i;
+	    for (i = 0; i < n; i++)
+	    {
+		cout <<(p + i)->fullname << "  " <<(p + i)->hobby;
+		cout << "  " << (p+i)->opplevel;
+	    }
+	}
+	int reverse(double *p, double *q)
+	{
+	    using namespace std;
+	    double temp;
+	    if (p == q)
+	    {
+		cout << "数组为空！";
+		return 0;
+	    }
+	    q--;
+	    while (p <= q)
+	    {
+		temp = *p;
+		*p = *q;
+		*q = temp;
+		p++;
+		q--;
+	    }
+	    return 1;
+	}
